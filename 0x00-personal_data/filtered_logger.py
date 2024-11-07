@@ -18,19 +18,22 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
-        original_message = super(RedactingFormatter, self).format(record)
-        return filter_datum(self.fields, self.REDACTION, original_message, self.SEPARATOR)
+        org_msg = super().format(record)
+        return filter_datum(
+            self.fields,
+            elf.REDACTION,
+            org_msg,
+            self.SEPARATOR
+            )
 
 
-def filter_datum(fields: List[str],
-                redaction: str,
-                message: str,
-                separator: str
+def filter_datum(
+    fields: List[str],
+    redaction: str,
+    message: str,
+    separator: str
                 ) -> str:
-    '''Returns log message'''
-    #pattern = f'({"|".join(fields)})=[^;]*'
-    #replacement = rf"\1={redaction}"
-    #return re.sub(pattern, replacement, message)
+    '''Filter'''
     for field in fields:
         regex = f"{field}=[^{separator}]*"
         message = re.sub(regex, f"{field}={redaction}", message)
