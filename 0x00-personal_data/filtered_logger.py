@@ -28,6 +28,10 @@ def filter_datum(fields: List[str],
                 separator: str
                 ) -> str:
     '''Returns log message'''
-    pattern = f'({"|".join(fields)})=[^;]*'
-    replacement = rf"\1={redaction}"
-    return re.sub(pattern, replacement, message)
+    #pattern = f'({"|".join(fields)})=[^;]*'
+    #replacement = rf"\1={redaction}"
+    #return re.sub(pattern, replacement, message)
+    for field in fields:
+        regex = f"{field}=[^{separator}]*"
+        message = re.sub(regex, f"{field}={redaction}", message)
+    return message
