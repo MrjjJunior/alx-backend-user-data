@@ -21,7 +21,7 @@ class RedactingFormatter(logging.Formatter):
         org_msg = super().format(record)
         return filter_datum(
             self.fields,
-            elf.REDACTION,
+            self.REDACTION,
             org_msg,
             self.SEPARATOR
             )
