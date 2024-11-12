@@ -75,7 +75,7 @@ class BasicAuth(Auth):
             return
         except Exception:
             return
-        
+
         if not users:
             return
         for user in users:
