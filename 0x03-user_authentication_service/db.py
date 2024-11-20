@@ -39,14 +39,18 @@ class DB:
                  hashed_password: str
                  ) -> User:
         ''' Method adds user '''
-        try:
-            new_usr = User(email=email, hashed_password=hashed_password)
-            self._session.add(new_usr)
-            self._session.commit()
-        except Exception:
-            self._session.rollback()
-            new_user = None
-        return new_usr
+        new_user = User(email=email, hashed_password=hashed_password)
+        self._session.add(new_user)
+        self._session.commit()
+        return new_user
+        # try:
+        #    new_usr = User(email=email, hashed_password=hashed_password)
+        #    self._session.add(new_usr)
+        #    self._session.commit()
+        # except Exception:
+        #    self._session.rollback()
+        #    new_user = None
+        # return new_usr
 
     def find_user_by(self, **kwargs) -> User:
         ''' Finds user by keyword and returns first row '''
