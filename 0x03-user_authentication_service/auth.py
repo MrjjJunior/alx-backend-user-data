@@ -22,7 +22,7 @@ class Auth:
 
     def _db(self):
         ''' '''
-        
+
     def register_user(self, email: str, password: str) -> User:
         ''' Method to create a new User '''
         try:
@@ -30,7 +30,4 @@ class Auth:
         except NoResultFound:
             return self._db.add_user(email, _hash_password(password))
         raise ValueError("User {} already exists".format(email))
-
-            # if email in User:
-            #    return f"<email> already exists."
 
