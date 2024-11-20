@@ -56,11 +56,11 @@ class DB:
         ''' Finds user by keyword and returns first row '''
         try:
             found = self._session.query(User).filter_by(**kwargs).one()
-            return found
         except NoResultFound:
             raise NoResultFound()
         except TypeError as e:
             raise InvalidRequestError()
+        return found
 
     def update_user(self, user_id: int, **kwargs) -> None:
         ''' Updates user by id '''
