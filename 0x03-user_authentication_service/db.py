@@ -12,6 +12,7 @@ from user import Base
 # My imports
 from user import User
 
+
 class DB:
     """DB class
     """
@@ -34,9 +35,9 @@ class DB:
         return self.__session
 
     def add_user(self,
-                email: str,
-                hashed_password: str
-                ) -> User:
+                 email: str,
+                 hashed_password: str
+                 ) -> User:
         ''' Method adds user '''
         try:
             new_usr = User(email=email, hashed_password=hashed_password)
@@ -46,7 +47,7 @@ class DB:
             self._session.rollback()
             new_user = None
         return new_usr
-    
+
     def find_user_by(self, **kwargs) -> User:
         ''' Finds user by keyword and returns first row '''
         try:
@@ -62,9 +63,9 @@ class DB:
         # findinf user to update
         try:
             user_to_update = self.find_user_by(user_id)
-            if user_to_update == None:
+            if user_to_update is None:
                 return
-        
+
         # updating user
             for key, value in kwargs.items():
                 if not hasattr(user_to_update, key):
@@ -72,6 +73,6 @@ class DB:
                 setattr(user_to_update, key, value)
 
             self._session.commit()
-    
+
         except NoResultFound:
             raise ValueError()
