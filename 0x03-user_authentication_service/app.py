@@ -13,7 +13,6 @@ def main():
     return jsonify({"message": "Bienvenue"})
 
 
-'''
 @app.route("/users", methods=["POST"])
 def users():
     '''  '''
@@ -24,7 +23,6 @@ def users():
         return jsonify({"email": user.email, "message": "user created"}), 201
     except ValueError:
         return jsonify({"error": "email already registered"}), 400
-'''
 
 
 if __name__ == "__main__":
