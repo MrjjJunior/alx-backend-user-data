@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Flask app """
 from flask import Flask, jsonify, request
-from auth import Auth 
+from auth import Auth
 
 app = Flask(__name__)
 AUTH = Auth()
@@ -23,8 +23,6 @@ def users():
         return jsonify({"email": user.email, "message": "user created"}), 201
     except ValueError:
         return jsonify({"error": "email already registered"}), 400
-
-    return jsonify({"email": email, "message": "user created"})
 
 
 if __name__ == "__main__":
