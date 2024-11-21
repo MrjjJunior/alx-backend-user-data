@@ -2,6 +2,7 @@
 """ Flask app """
 from flask import Flask, jsonify, request
 from auth import Auth
+from bcrypt import checkpw
 
 app = Flask(__name__)
 AUTH = Auth()
@@ -25,5 +26,10 @@ def users():
         return jsonify({"error": "email already registered"}), 400
 
 
+@app.route("/", methods=["GET"])
+def valid_login(email: str, password:str) -> bool:
+    '''  '''
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port="5000")
+    app.run(host="0.0.0.0", port="5000", debug=True)
